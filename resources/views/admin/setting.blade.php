@@ -178,7 +178,6 @@
                  {{csrf_field()}}
                  <div class="form-group">
                      <input type="hidden" name="id"  id="id">
-                     <label for="recipient-name" class="col-form-label"> رفم البوست:</label>
                        <input type="number" class="form-control" name="direct_post" id="direct_post">
                  </div>
                 <div class="modal-footer">
