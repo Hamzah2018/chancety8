@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use App\Http\Controllers\admin\SettingController;
 Route::get('/', function () {
     return view('welcome');
 });
-// admin.setting
-
+// admin setting , custumor route
+Route::prefix('admin')->group(function () {
+Route::resource('customer', CustomerController::class);
 Route::resource('setting', SettingController::class);
+});
