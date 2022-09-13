@@ -7,6 +7,7 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css'" rel="stylesheet">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -239,6 +240,7 @@
 <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
@@ -265,6 +267,14 @@
         modal.find('.modal-body #direct_post').val(direct_post);
     })
 </script>
+@push('scripts')
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready( function () {
+          $('#example2').DataTable();
+       } );
+    </script>
+@endpush
 
 @endsection
 

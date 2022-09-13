@@ -19,6 +19,7 @@ class CustomerController extends Controller
         //           ::select('name','surname')->where('id', 1)->get();
         $customers = User::where('user_type','customer' )->get();
         return view('admin.customer',compact( 'customers'));
+        // return view('welcome',compact( 'customers'));
     }
 
     /**
@@ -40,18 +41,27 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'fname' => 'required|unique:posts|max:255',
+            'lname' => 'required|unique:posts|max:255',
+            'fname' => 'required|unique:posts|max:255',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
         DB::beginTransaction();
         $customers= new  User();
         $customers->fname = $request->fname;
         $customers->lname = $request->lname;
-        $customers->user_type = $request->user_type;
+        $customers->user_type = 'customer';
         $customers->password = $request->password;
         $customers->email = $request->email;
         $customers->second_email = $request->second_email;
         $customers->save();
         DB::commit();
         session()->flash('Add', 'تم اضافة العميل بنجاح ');
-        return redirect('/setting');
+        return redirect('/customer');
     }
 
     /**

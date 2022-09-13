@@ -6,6 +6,7 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css'" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
@@ -74,10 +75,17 @@
                 {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Striped Rows.. <a href="">Learn more</a></p> --}}
             </div>
             <div class="card-body">
-                <div class="table-responsive-lg"  style="overflow-x:auto;">
+                <div class="row justify-content-md-center">
+                    {{--  --}}
+
+                        <div class="table-responsive-lg"  style="overflow-x:auto;">
+
+                    {{-- < --}}
+                {{-- <div class="table-responsive-lg"  style="overflow-x:auto;"> --}}
                     <table class="table text-md-nowrap" id="example2">
                         <thead >
                             <tr>
+                                <th class="border-bottom-0">#</th>
                                 <th class="wd-15p border-bottom-0">رقم العميل </th>
                                 <th class="wd-15p border-bottom-0"> الاسم الاول  </th>
                                 <th class="wd-15p border-bottom-0">  الاسم الثاني/الصفه </th>
@@ -87,8 +95,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $i = 0;
+                            @endphp
                             @foreach ($customers as $customer)
+                                @php
+                                $i++
+                                @endphp
                             <tr id={{$customer->id}}>
+                                <td>{{$i}}</td>
                                 <td>{{ $customer->id }}</td>
                                 <td> {{ $customer->fname }}</td>
                                 <td> {{ $customer->lname }}</td>
@@ -108,13 +123,13 @@
                                     data-toggle="modal" href="#exampleModal2"
                                     title="تعديل"><i class="las la-pen"></i></a>
                                      <button class="btn btn-outline-danger btn-sm"
-                                                 data-id="{{$customer->id}}"
+                                                data-id="{{$customer->id}}"
                                                 data-fname="{{ $customer->fname }}" data-toggle="modal"
                                                 data-lname="{{ $customer->lname }}" data-toggle="modal"
                                                 data-email="{{ $customer->email }}" data-toggle="modal"
                                                 data-second_email="{{ $customer->second_email }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
-                                                {{-- <a href="{{route('setting.show',$setting->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a> --}}
+                                                {{-- <a href="{{route('admin.custshow',$customer->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a> --}}
                                             </td>
                             </tr>
                             @endforeach
@@ -148,13 +163,13 @@
                                     <div class="form-group">
                                     {{-- <p class="mg-b-10">نوع الشقه</p> --}}
                                     <div class="form-group">
-										<input type="number" class="form-control" id="inputName" name="id" placeholder="رقم العميل">
-										<input type="text" class="form-control" id="inputName" name="fname" placeholder="الاسم الاول">
-										<input type="text" class="form-control" id="inputName" name="lname" placeholder="الاسم الثاني">
-										<input type="text" class="form-control" id="inputName" name="user_type" placeholder="نوع المستخدم">
-										<input type="text" class="form-control" id="inputName" name="password" placeholder="كلمة مرور">
-										<input type="email" class="form-control" id="inputName" name="email" placeholder=" الايمل">
-										<input type="email" class="form-control" id="inputName" name="second_email" placeholder="الايمل الثاني ">
+										<input type="number" class="form-control" id="inputName" name="id" placeholder="رقم العميل" required>
+										<input type="text" class="form-control" id="inputName" name="fname" placeholder="الاسم الاول" required>
+										<input type="text" class="form-control" id="inputName" name="lname" placeholder="الاسم الثاني" required>
+										{{-- <input type="text" class="form-control" id="inputName" name="user_type" placeholder="نوع المستخدم"> --}}
+										<input type="text" class="form-control" id="inputName" name="password" placeholder="كلمة مرور" required>
+										<input type="email" class="form-control" id="inputName" name="email" placeholder=" الايمل" required>
+										<input type="email" class="form-control" id="inputName" name="second_email" placeholder="الايمل الثاني" required>
 									</div>
                                     {{-- <div class="form-group">
 										<input type="text" class="form-control" id="inputName" name="" placeholder="Name">
@@ -270,6 +285,7 @@
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
+
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
@@ -313,6 +329,17 @@
         modal.find('.modal-body #second_email').val(second_email);
     })
 </script>
+<script>
 
+
+
+@push('scripts')
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready( function () {
+          $('#example2').DataTable();
+       } );
+    </script>
+@endpush
 @endsection
 
