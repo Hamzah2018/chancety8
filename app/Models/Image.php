@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
-    
+    protected $table = 'images';
+
+
     public $fillable= ['filename','imageable_id','imageable_type'];
     public function imageable()
     {

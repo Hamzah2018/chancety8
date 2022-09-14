@@ -163,7 +163,7 @@
                                     <div class="form-group">
                                     {{-- <p class="mg-b-10">نوع الشقه</p> --}}
                                     <div class="form-group">
-										<input type="number" class="form-control" id="inputName" name="id" placeholder="رقم العميل" required>
+										{{-- <input type="number" class="form-control" id="inputName" name="id" placeholder="رقم العميل" required> --}}
 										<input type="text" class="form-control" id="inputName" name="fname" placeholder="الاسم الاول" required>
 										<input type="text" class="form-control" id="inputName" name="lname" placeholder="الاسم الثاني" required>
 										{{-- <input type="text" class="form-control" id="inputName" name="user_type" placeholder="نوع المستخدم"> --}}
@@ -179,13 +179,13 @@
                                     {{-- <div class="form-group">
 										<input type="text" class="form-control" id="inputName" name="" placeholder="Name">
 									</div> --}}
+                                <button type="submit" class="btn btn-primary rounded">حفظ</button>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
                         <div class="form-group mb-0 mt-3 justify-content-end">
                             <div>
-                                <button type="submit" class="btn btn-primary rounded">حفظ</button>
                                 {{-- <button type="submit" class="btn btn-secondary">إلغاء</button> --}}
                             </div>
                         </div>

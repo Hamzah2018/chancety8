@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Image;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -42,7 +44,7 @@ class CustomerController extends Controller
     {
         //
         $validated = $request->validate([
-            'id' =>'numeric',
+            // 'id' =>'numeric',
             // 'fname' => 'required|unique:posts|max:255',
             // 'lname' => 'required|unique:posts|max:255',
             'fname' => ['required', 'string', 'max:255','min:3'],
@@ -62,15 +64,17 @@ class CustomerController extends Controller
         $customers->save();
 
         if($request->hasFile('image')){
-            $file = file('image');
+
+            $file = $request->file('image');
                 $name = $file->getClientOriginalName();
                 // $file->storeAs('');
-                $file->storeAs('attachments/users/'.$customers->user_type,$file->getClientOriginalName(),'upload_attachments');
+                $file->storeAs('attachments/users/'.$customers->user_type.'/'.$customers->name,$file->getClientOriginalName(),'upload_attachments');
             $image = new Image();
             $image->filename = $name;
-            $image->imageable_id = $apartments->id;
+            $image->imageable_id = $customers->id;
             $image->imageable_type = 'App\Models\user';
             $image->save();
+
     }
         DB::commit();
         session()->flash('Add', 'تم اضافة العميل بنجاح ');
