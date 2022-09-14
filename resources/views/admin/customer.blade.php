@@ -170,6 +170,11 @@
 										<input type="text" class="form-control" id="inputName" name="password" placeholder="كلمة مرور" required>
 										<input type="email" class="form-control" id="inputName" name="email" placeholder=" الايمل" required>
 										<input type="email" class="form-control" id="inputName" name="second_email" placeholder="الايمل الثاني" required>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for=""> صوره شخصيه<span class ="text-danger">*</span></label>
+                                                <input type="file" id="img" name="image" accept="image/*">
+                                        </div>
 									</div>
                                     {{-- <div class="form-group">
 										<input type="text" class="form-control" id="inputName" name="" placeholder="Name">

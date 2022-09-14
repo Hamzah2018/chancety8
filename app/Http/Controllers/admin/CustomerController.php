@@ -42,14 +42,15 @@ class CustomerController extends Controller
     {
         //
         $validated = $request->validate([
-            'fname' => 'required|unique:posts|max:255',
-            'lname' => 'required|unique:posts|max:255',
-            'fname' => 'required|unique:posts|max:255',
-            'name' => ['required', 'string', 'max:255'],
+            'id' =>'numeric',
+            // 'fname' => 'required|unique:posts|max:255',
+            // 'lname' => 'required|unique:posts|max:255',
+            'fname' => ['required', 'string', 'max:255','min:3'],
+            'lname' => ['required', 'string', 'max:255','min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', ],
         ]);
-
+        // 'confirmed'
         DB::beginTransaction();
         $customers= new  User();
         $customers->fname = $request->fname;
@@ -59,9 +60,21 @@ class CustomerController extends Controller
         $customers->email = $request->email;
         $customers->second_email = $request->second_email;
         $customers->save();
+
+        if($request->hasFile('image')){
+            $file = file('image');
+                $name = $file->getClientOriginalName();
+                // $file->storeAs('');
+                $file->storeAs('attachments/users/'.$customers->user_type,$file->getClientOriginalName(),'upload_attachments');
+            $image = new Image();
+            $image->filename = $name;
+            $image->imageable_id = $apartments->id;
+            $image->imageable_type = 'App\Models\user';
+            $image->save();
+    }
         DB::commit();
         session()->flash('Add', 'تم اضافة العميل بنجاح ');
-        return redirect('/customer');
+        return redirect('admin/customer');
     }
 
     /**
@@ -101,12 +114,12 @@ class CustomerController extends Controller
         $customers->update([
             'fname' => $request->fname,
             'lname' => $request->lname,
-            'user_type' => $request->user_type,
+            'user_type' => 'customer',
             'email' => $request->email,
             'second_email' => $request->second_email
         ]);
         session()->flash('edit','تم تعديل العميل بنجاج');
-        return redirect('/customer');
+        return redirect('admin/customer');
     }
 
     /**
