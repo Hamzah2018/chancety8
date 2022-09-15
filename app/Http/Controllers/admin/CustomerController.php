@@ -68,13 +68,12 @@ class CustomerController extends Controller
             $file = $request->file('image');
                 $name = $file->getClientOriginalName();
                 // $file->storeAs('');
-                $file->storeAs('attachments/users/'.$customers->user_type.'/'.$customers->name,$file->getClientOriginalName(),'upload_attachments');
+                $file->storeAs('attachments/users/'.$customers->user_type.'/'.$customers->fname,$file->getClientOriginalName(),'upload_attachments');
             $image = new Image();
             $image->filename = $name;
             $image->imageable_id = $customers->id;
             $image->imageable_type = 'App\Models\user';
             $image->save();
-
     }
         DB::commit();
         session()->flash('Add', 'تم اضافة العميل بنجاح ');
@@ -90,6 +89,10 @@ class CustomerController extends Controller
     public function show($id)
     {
         //
+        $customer = User::findorfail($id);
+        // return $Apartment;
+        // compact( ['apartments','user'])
+        return view('admin.custshow',compact( 'customer'));
     }
 
     /**
@@ -103,13 +106,6 @@ class CustomerController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -126,20 +122,53 @@ class CustomerController extends Controller
         return redirect('admin/customer');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         //
         $id = $request->id;
         User::find($id)->delete();
         session()->flash('delete','تم حذف العميل بنجاح');
-        return redirect('customer');
+        return redirect('admin/customer');
         // back()
         // redirect('/home/dashboard');
     }
+
+
+    public function Upload_attachment(Request $request)
+    {
+        foreach($request->file('image') as $file)
+        {
+            $name = $file->getClientOriginalName();
+                        //  'attachments/users/'.$customers->user_type.'/'.$customers->name
+            $file->storeAs('attachments/users/'.$request->user_type.'/'.$request->fname, $file->getClientOriginalName(),'upload_attachments');
+
+            // insert in image_table
+            $images= new image();
+            $images->filename=$name;
+            $images->imageable_id = $request->id;
+            $images->imageable_type = 'App\Models\User';
+            $images->save();
+        }
+        session()->flash('uploaded','تم الرفع بنجاح');
+        return back();
+        // return redirect()->route('apartments',$request->id);
+    }
+
+    public function Download_attachment($customerName,$filename)
+    {                                                               //'.$Apartmentaddress.
+         return response()->download(public_path('attachments/users/'.$filename));
+        //  return $name;f
+    }
+
+    public function Delete_attachment(Request $request)
+    {
+        // Delete img in server disk
+        Storage::disk('upload_attachments')->delete('attachments/users/'.$request->user_type.'/'.$request->filename);
+        // Delete in data
+        image::where('id',$request->id)->where('filename',$request->filename)->delete();
+        // session()->flash('delete','تم الرفع بنجاح');
+            return back();
+    }
+
+
 }

@@ -90,6 +90,7 @@
                                 <th class="wd-15p border-bottom-0"> الاسم الاول  </th>
                                 <th class="wd-15p border-bottom-0">  الاسم الثاني/الصفه </th>
                                 <th class="wd-15p border-bottom-0">   نوع الاحساب</th>
+                                <th class="wd-15p border-bottom-0"> كلمة السر</th>
                                 <th class="wd-15p border-bottom-0"> الايمل</th>
                                 <th class="wd-15p border-bottom-0"> الايمل الثاني</th>
                             </tr>
@@ -129,7 +130,7 @@
                                                 data-email="{{ $customer->email }}" data-toggle="modal"
                                                 data-second_email="{{ $customer->second_email }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
-                                                {{-- <a href="{{route('admin.custshow',$customer->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a> --}}
+                                                <a href="{{route('customer.show',$customer->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a>
                                             </td>
                             </tr>
                             @endforeach
@@ -172,7 +173,7 @@
 										<input type="email" class="form-control" id="inputName" name="second_email" placeholder="الايمل الثاني" required>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for=""> صوره شخصيه<span class ="text-danger">*</span></label>
+                                                <label for=""><h6>  صوره شخصيه<span class ="text-danger">*</span> </h6></label>
                                                 <input type="file" id="img" name="image" accept="image/*">
                                         </div>
 									</div>

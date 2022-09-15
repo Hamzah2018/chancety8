@@ -65,34 +65,33 @@
 
                                                         <thead >
                                                             <tr>
-                                                                <th class="wd-15p border-bottom-0">رقم الشقه</th>
-                                                                <th class="wd-15p border-bottom-0">عنوان الشقه </th>
-                                                                <th class="wd-20p border-bottom-0">السمسار</th>
-                                                                <th class="wd-15p border-bottom-0">نوع الشقه</th>
-                                                                <th class="wd-10p border-bottom-0">حجم الشقه</th>
-                                                                <th class="wd-25p border-bottom-0">عدد الغرف </th>
-                                                                <th class="wd-25p border-bottom-0">تاريخ البداء </th>
-                                                                <th class="wd-25p border-bottom-0">تاريخ الانتهاء </th>
-                                                                <th class="wd-25p border-bottom-0">يومي اسبوعي شهري</th>
-                                                                <th class="wd-25p border-bottom-0">سعر ايجار الشقه  </th>
-                                                                <th class="wd-25p border-bottom-0">عدد الدفعة المطلوب تقديمها</th>
-                                                                <th class="wd-25p border-bottom-0">ملاحظة اخراء</th>
+                                                                <th class="wd-15p border-bottom-0">رقم العميل</th>
+                                                                <th class="wd-15p border-bottom-0">لاسم الاول</th>
+                                                                <th class="wd-20p border-bottom-0">الاسم الثاني/الصفه</th>
+                                                                <th class="wd-15p border-bottom-0">نوع الحساب</th>
+                                                                <th class="wd-10p border-bottom-0"> كلمة السر</th>
+                                                                <th class="wd-25p border-bottom-0">الايمل</th>
+                                                                <th class="wd-25p border-bottom-0">الايمل الثاني </th>
                                                             </tr>
                                                         </thead>
                                                     <tr>
                                                         <tbody>
                                                         {{-- <th scope="row">رقم الشقه</th> --}}
-                                                        <td>{{ $user->id }}</td>
 
+                                                        <td>{{ $customer->id }}</td>
+                                                        <td> {{ $customer->fname }}</td>
+                                                        <td> {{ $customer->lname }}</td>
+                                                        <td> {{ $customer->user_type }}</td>
+                                                        <td> {{ $customer->password }}</td>
+                                                        <td> {{ $customer->email }}</td>
+                                                        <td> {{ $customer->second_email }}</td>
                                                         {{-- <th scope="row">عنوان الشقه</th> --}}
-                                                        <td>{{ $user->name }}</td>
                                                         {{-- <th scope="row">اسم السمسار </th> --}}
                                                         <td>
-                                                            {{ $user->email }}
                                                          {{-- @foreach ($apartment->user as $us )
                                                               {{ $us->id}}
                                                          @endforeach --}}
-                                                   
+
                                                     </tbody>
                                                 </table>
                                                  </div>
@@ -111,14 +110,14 @@
                                                                         for="academic_year">مرفقات
                                                                         : <span class="text-danger">*</span></label>
 
-                                                                    <input type="file" accept="image/*" name="images[]" multiple required>
-                                                                    <input type="hidden" name="address"  value="{{$apartment->address}}">
-                                                                    <input type="hidden" name="id" value="{{ $apartment->id }}">
+                                                                    <input type="file" accept="image/*" name="image" required>
+                                                                    <input type="hidden" name="name"  value="{{$customer->name}}">
+                                                                    <input type="hidden" name="id" value="{{ $customer->id }}">
                                                                 </div>
                                                             </div>
                                                             <br><br>
                                                             <button type="submit" class="button button-border x-small">
-                                                                   تاكيد
+                                                                تاكيد
                                                             </button>
                                                         </form>
                                                     </div>
@@ -134,7 +133,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($apartment->images as $attachment)
+                                                        {{-- @foreach($customer->image as $attachment)
                                                             <tr style='text-align:center;vertical-align:middle'>
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{$attachment->filename}}</td>
@@ -152,8 +151,8 @@
 
                                                                 </td>
                                                             </tr>
-                                                            @include('apartments.Delete_img')
-                                                        @endforeach
+                                                            @include('customer.Delete_img')
+                                                        @endforeach --}}
                                                         </tbody>
                                                     </table>
                                                 </div>
