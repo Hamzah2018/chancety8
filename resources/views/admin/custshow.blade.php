@@ -6,7 +6,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+							<h4 class="content-title mb-0 my-auto">معلومات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ العميل</span>
 						</div>
 					</div>
 					<div class="d-flex my-xl-auto right-content">
@@ -107,7 +107,7 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label
-                                                                        for="academic_year">مرفقات
+                                                                        for="">مرفقات
                                                                         : <span class="text-danger">*</span></label>
 
                                                                     <input type="file" accept="image/*" name="image" required>
@@ -126,33 +126,40 @@
                                                            style="text-align:center">
                                                         <thead>
                                                         <tr class="table-secondary">
-                                                            <th scope="col">#</th>
+                                                            <th scope="col">اسم العميل</th>
                                                             <th scope="col"> اسم الملف</th>
                                                             <th scope="col"> انشات في </th>
                                                             <th scope="col"> العمليات</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        {{-- @foreach($customer->image as $attachment)
+                                                            @php
+                                                            $attachment = $customer->image;
+                                                            @endphp
+                                                        {{-- {{-- @foreach($customer->image as $attachment) --}}
+                                                        @isset($attachment->filename)
                                                             <tr style='text-align:center;vertical-align:middle'>
-                                                                <td>{{$loop->iteration}}</td>
+                                                                {{-- <td>{{$loop->iteration}}</td> --}}
+                                                                <td>{{ $customer->fname }}</td>
                                                                 <td>{{$attachment->filename}}</td>
                                                                 <td>{{$attachment->created_at->diffForHumans()}}</td>
-                                                                <td colspan="2">
+                                                                {{-- <td colspan="2">
                                                                     <a class="btn btn-outline-info btn-sm"
-                                                                        href="{{url('Download_attachment')}}/{{ $attachment->imageable->address }}/{{$attachment->filename}}"
+                                                                        href="{{url('Download_attachment')}}/{{ $customer->imageable->name }}/{{$customer->filename}}"
                                                                         role="button"><i class="fas fa-download"></i>&nbsp; تنزيل</a>
-
+                                                                        --}}
+                                                                        <td colspan="2">
                                                                     <button type="button" class="btn btn-outline-danger btn-sm"
                                                                             data-toggle="modal"
-                                                                            data-target="#Delete_img{{ $attachment->id }}"
+                                                                            data-target="#Delete_img{{ $attachment->id}}"
                                                                             title="حذف">حذف
                                                                     </button>
 
                                                                 </td>
                                                             </tr>
-                                                            @include('customer.Delete_img')
-                                                        @endforeach --}}
+                                                            @endisset
+                                                            @include('admin.Delete_img')
+                                                        {{-- @endforeach --}}
                                                         </tbody>
                                                     </table>
                                                 </div>

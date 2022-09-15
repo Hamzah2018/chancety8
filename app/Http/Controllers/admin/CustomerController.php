@@ -136,8 +136,8 @@ class CustomerController extends Controller
 
     public function Upload_attachment(Request $request)
     {
-        foreach($request->file('image') as $file)
-        {
+
+        $file = $request->file('image');
             $name = $file->getClientOriginalName();
                         //  'attachments/users/'.$customers->user_type.'/'.$customers->name
             $file->storeAs('attachments/users/'.$request->user_type.'/'.$request->fname, $file->getClientOriginalName(),'upload_attachments');
@@ -148,25 +148,25 @@ class CustomerController extends Controller
             $images->imageable_id = $request->id;
             $images->imageable_type = 'App\Models\User';
             $images->save();
-        }
+
         session()->flash('uploaded','تم الرفع بنجاح');
         return back();
         // return redirect()->route('apartments',$request->id);
     }
 
-    public function Download_attachment($customerName,$filename)
+    public function Download_attachment($fname,$filename)
     {                                                               //'.$Apartmentaddress.
-         return response()->download(public_path('attachments/users/'.$filename));
-        //  return $name;f
+         return response()->download(public_path('attachments/users/'.$fname.'/'.$filename));
+    //  return $name;
     }
 
     public function Delete_attachment(Request $request)
     {
-        // Delete img in server disk
-        Storage::disk('upload_attachments')->delete('attachments/users/'.$request->user_type.'/'.$request->filename);
+        // Delete img in server disk                                       $customers->user_type.'/'.$customers->fname
+        Storage::disk('upload_attachments')->delete('attachments/users/'.$request->user_type.'/'.$request->fname.'/'.$request->filename);
         // Delete in data
         image::where('id',$request->id)->where('filename',$request->filename)->delete();
-        // session()->flash('delete','تم الرفع بنجاح');
+         session()->flash('delete','تم الرفع بنجاح');
             return back();
     }
 

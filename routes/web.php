@@ -27,6 +27,6 @@ Route::resource('customer', CustomerController::class);
 Route::resource('setting', SettingController::class);
 });
 Route::post('Upload_attachment', [CustomerController::class,'Upload_attachment'])->name('Upload_attachment');
-Route::get('Download_attachment/{Customername}/{filename}', [CustomerController::class,'Download_attachment'])->name('Download_attachment');
+Route::get('Download_attachment/{fname}/{filename}', [CustomerController::class,'Download_attachment'])->name('Download_attachment');
 Route::post('Delete_attachment', [CustomerController::class, 'Delete_attachment'])->name('Delete_attachment');
 
