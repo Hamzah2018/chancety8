@@ -23,6 +23,16 @@ class CustomerController extends Controller
         return view('admin.customer',compact( 'customers'));
         // return view('welcome',compact( 'customers'));
     }
+    public function datatable(Request $request)
+    {
+        $customers = User::where('user_type','customer' )->get();
+        return view('customers.datatable', compact('customers'));
+
+    }
+    public function ajax()
+     {
+      return view('customers.ajax');
+       }
 
     /**
      * Show the form for creating a new resource.

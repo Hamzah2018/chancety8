@@ -1,13 +1,27 @@
 @extends('layouts.master')
 @section('css')
 <!-- Internal Data table css -->
+
+
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
-<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css'" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+ <!---Internal Owl Carousel css-->
+<link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
+<!---Internal  Multislider css-->
+<link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+<link href="{{URL::asset('assets/datatable/css/datatable.min.css')}}" rel="stylesheet" />
+<style>
+    body {
+        font-size: 12pt;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+</style>
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -63,7 +77,7 @@
 				<div class="row">
 	<!--div-->
     <div class="col-xl-12">
-        <div class="card">
+        <div class="card mg-b-20">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
 
@@ -75,14 +89,15 @@
                 {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Striped Rows.. <a href="">Learn more</a></p> --}}
             </div>
             <div class="card-body">
-                <div class="row justify-content-md-center">
+                <div class="table-responsive">
                     {{--  --}}
 
-                        <div class="table-responsive-lg"  style="overflow-x:auto;">
+                                                            {{-- text-align: center --}}
+                        <div class="table-responsive-lg "  style="text-align: center;">
 
                     {{-- < --}}
                 {{-- <div class="table-responsive-lg"  style="overflow-x:auto;"> --}}
-                    <table class="table text-md-nowrap" id="example2">
+                    <table class="table  key-buttons text-md-nowrap scroll-horizontal "  data-page-length='7'  data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
                         <thead >
                             <tr>
                                 <th class="border-bottom-0">#</th>
@@ -271,27 +286,31 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
-<!-- Internal Data tables -->
-<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
-<!--Internal  Datatable js -->
-<script src="{{URL::asset('assets/js/table-data.js')}}"></script>
-<script src="{{URL::asset('assets/js/modal.js')}}"></script>
 
+   <!-- Internal Data tables -->
+   {{-- <script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script> --}}
+
+   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+   <!--Internal  Datatable js -->
+   <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+   <!-- Internal Prism js-->
+   <script src="{{URL::asset('assets/plugins/prism/prism.js')}}"></script>
+   <script src="{{URL::asset('assets/datatable/datatable.min.js')}}"></script>
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
@@ -335,17 +354,13 @@
         modal.find('.modal-body #second_email').val(second_email);
     })
 </script>
+
+{{-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script> --}}
+{{-- <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script> --}}
 <script>
-
-
-
-@push('scripts')
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script>
-      $(document).ready( function () {
-          $('#example2').DataTable();
-       } );
-    </script>
-@endpush
+   $(document).ready(function () {
+        $('#datatable').DataTable();
+   });
+</script>
 @endsection
 

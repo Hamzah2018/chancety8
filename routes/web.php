@@ -23,8 +23,11 @@ use App\Http\Controllers\admin\CustomerController;
 // admin setting , custumor route
 Route::prefix('admin')->group(function () {
 Route::resource('customer', CustomerController::class);
+Route::get('/datatables', [CustomerController::class, 'datatable'])->name('datatable');
+Route::post('/ajax', [CustomerController::class, 'ajax'])->name('active');
 // Route::get('apartment/show',['apartment', CustomerController::class,'show'])->name('admin.custshow');
 Route::resource('setting', SettingController::class);
+
 });
 Route::post('Upload_attachment', [CustomerController::class,'Upload_attachment'])->name('Upload_attachment');
 Route::get('Download_attachment/{fname}/{filename}', [CustomerController::class,'Download_attachment'])->name('Download_attachment');

@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
         'fname',
         'lname',
@@ -35,6 +37,22 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function scopeSearch($query , $request)
+    {
+        if(!empty($request->search['value'])) {
+            $search = '%'.$request->search['value'].'%';
+            return $query->where('full_name', 'like' , '%'.$search.'%');
+        }else {
+            return $query;
+        }
+    }
+    public function setPasswordAttribute($password)
+    {
+        if ( !empty($password) ) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
 
     /**
      * The attributes that should be cast.
@@ -44,7 +62,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
