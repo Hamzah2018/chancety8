@@ -15,17 +15,14 @@ use App\Http\Controllers\admin\CustomerController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('home');
+});
 
 // Route::resource('/', CustomerController::class);
 // admin setting , custumor route
 Route::prefix('admin')->group(function () {
 Route::resource('customer', CustomerController::class);
-Route::get('/datatables', [CustomerController::class, 'datatable'])->name('datatable');
-Route::post('/ajax', [CustomerController::class, 'ajax'])->name('active');
-// Route::get('apartment/show',['apartment', CustomerController::class,'show'])->name('admin.custshow');
 Route::resource('setting', SettingController::class);
 
 });

@@ -13,7 +13,7 @@
           .scroll
                 {
                 width: 100px;
-                Overflow-x:scroll;
+                Overflow-x:scroll !important;
                 }
                 th{
                     background-color: #eee;
@@ -26,8 +26,6 @@
                         height: 25px;
                         border: 1px dotted gray;
                         border-color: #96D4D4;
-
-
                     }
         </style>
         @include('layouts.head')

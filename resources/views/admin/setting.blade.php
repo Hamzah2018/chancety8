@@ -81,6 +81,8 @@
                             <tr>
                                 <th class="wd-15p border-bottom-0">رقم </th>
                                 <th class="wd-15p border-bottom-0"> رقم الوظيه المباشره</th>
+                                <th class="wd-15p border-bottom-0">اسم الموقع</th>
+                                <th class="wd-15p border-bottom-0">وصف الموقع</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,17 +90,23 @@
                             <tr id={{$setting->id}}>
                                 <td>{{ $setting->id }}</td>
                                 <td> {{ $setting->direct_post }}</td>
+                                <td> {{ $setting->website_name }}</td>
+                                <td> {{ $setting->website_descripe }}</td>
                                     {{-- <a href="{{route('setting.edit', $setting->id )}}" class ="modal-effect btn btn-outline-success rounded-pill">Edit</a> --}}
                                     {{-- <a href="" class ="modal-effect btn btn-outline-danger rounded-pill">delete</a> --}}
                                     <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                     data-id="{{$setting->id}}"
                                     data-direct_post="{{ $setting->direct_post}}"
+                                    data-website_name="{{ $setting->website_name }}" data-toggle="modal"
+                                    data-website_descripe="{{ $setting->website_descripe }}" data-toggle="modal"
                                     data-toggle="modal" href="#exampleModal2"
                                     title="تعديل"><i class="las la-pen"></i></a>
                                      <button class="btn btn-outline-danger btn-sm"
                                                  data-id="{{$setting->id}}"
                                                 data-direct_post="{{ $setting->direct_post }}" data-toggle="modal"
+                                                data-website_name="{{ $setting->website_name }}" data-toggle="modal"
+                                                data-website_descripe="{{ $setting->website_descripe }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
                                                 {{-- <a href="{{route('setting.show',$setting->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a> --}}
                                             </td>
@@ -134,7 +142,9 @@
                                     <div class="form-group">
                                     {{-- <p class="mg-b-10">نوع الشقه</p> --}}
                                     <div class="form-group">
-										<input type="number" class="form-control" id="inputName" name="direct_post" placeholder="وظيفه مباشره">
+										<input type="number" class="form-control" id="direct_post" name="direct_post" placeholder="رقم البوست">
+										<input type="number" class="form-control" id="website_name" name="website_name" placeholder="اسم الموقع">
+										<input type="number" class="form-control" id="website_descripe" name="website_descripe" placeholder="وصف الموقع">
 									</div>
                                     {{-- <div class="form-group">
 										<input type="text" class="form-control" id="inputName" name="" placeholder="Name">
@@ -180,6 +190,8 @@
                  <div class="form-group">
                      <input type="hidden" name="id"  id="id">
                        <input type="number" class="form-control" name="direct_post" id="direct_post">
+                       <input type="text" class="form-control" name="website_name" id="website_name">
+                       <input type="text" class="form-control" name="website_descripe" id="website_descripe">
                  </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">تاكيد</button>
@@ -208,6 +220,7 @@
                             <input type="hidden" name="id" id="id" value="id">
 
                             <input type="text" class="form-control" name="direct_post" id="direct_post" readonly>
+                            <input type="text" class="form-control" name="website_name" id="website_name" readonly>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -249,10 +262,14 @@
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var direct_post = button.data('direct_post')
+        var website_name = button.data('website_name')
+        var website_descripe = button.data('website_descripe')
 
         var modal = $(this)
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #direct_post').val(direct_post);
+        modal.find('.modal-body #website_name').val(website_name);
+        modal.find('.modal-body #website_descripe').val(website_descripe);
     })
 </script>
 
@@ -261,10 +278,14 @@
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var direct_post = button.data('direct_post')
+        var website_name = button.data('website_name')
+        var website_descripe = button.data('website_descripe')
 
         var modal = $(this)
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #direct_post').val(direct_post);
+        modal.find('.modal-body #website_name').val(website_name);
+        modal.find('.modal-body #website_descripe').val(website_descripe);
     })
 </script>
 @push('scripts')

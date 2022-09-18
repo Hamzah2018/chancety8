@@ -14,7 +14,7 @@
 <!---Internal  Multislider css-->
 <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
-<link href="{{URL::asset('assets/datatable/css/datatable.min.css')}}" rel="stylesheet" />
+{{-- <link href="{{URL::asset('assets/datatable/css/datatable.min.css')}}" rel="stylesheet" /> --}}
 <style>
     body {
         font-size: 12pt;
@@ -93,11 +93,13 @@
                     {{--  --}}
 
                                                             {{-- text-align: center --}}
-                        <div class="table-responsive-lg "  style="text-align: center;">
+                        {{-- <div class="table-responsive-lg text-align: center "  style="text-align: center;overflow-x:auto;"> --}}
 
                     {{-- < --}}
-                {{-- <div class="table-responsive-lg"  style="overflow-x:auto;"> --}}
-                    <table class="table  key-buttons text-md-nowrap scroll-horizontal "  data-page-length='7'  data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
+                <div class="table-responsive-lg"  style="overflow-x:auto;">
+                    {{-- <div class="table-responsive-lg"  > --}}
+                        {{-- <table class="table text-md-nowrap" id="example2"> --}}
+                    <table class="table text-md-nowrap key-buttons  "    data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
                         <thead >
                             <tr>
                                 <th class="border-bottom-0">#</th>
@@ -108,6 +110,9 @@
                                 <th class="wd-15p border-bottom-0"> كلمة السر</th>
                                 <th class="wd-15p border-bottom-0"> الايمل</th>
                                 <th class="wd-15p border-bottom-0"> الايمل الثاني</th>
+                                <th class="w-25 border-bottom-0"> العمليات </th>
+                                <th class="w-25 border-bottom-0">  </th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -147,6 +152,7 @@
                                                 data-target="#modaldemo9">حذف</button>
                                                 <a href="{{route('customer.show',$customer->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a>
                                             </td>
+                                            <td></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -310,7 +316,7 @@
    <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
    <!-- Internal Prism js-->
    <script src="{{URL::asset('assets/plugins/prism/prism.js')}}"></script>
-   <script src="{{URL::asset('assets/datatable/datatable.min.js')}}"></script>
+   {{-- <script src="{{URL::asset('assets/datatable/datatable.min.js')}}"></script> --}}
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)

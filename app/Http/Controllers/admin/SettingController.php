@@ -43,10 +43,13 @@ class SettingController extends Controller
         DB::beginTransaction();
         $settings= new  Setting();
         $settings->direct_post = $request->direct_post;
+        $settings->website_name = $request->website_name;
+        $settings->website_descripe = $request->website_descripe;
+
         $settings->save();
         DB::commit();
-        session()->flash('Add', 'تم اضافة البوست بنجاح ');
-        return redirect('/setting');
+        session()->flash('Add', 'تم اضافة البيانات بنجاح ');
+        return redirect('admin/setting');
     }
 
     /**
@@ -84,10 +87,12 @@ class SettingController extends Controller
         $id = $request->id;
         $setting = Setting::find($id);
         $setting->update([
-            'direct_post' => $request->direct_post
+            'direct_post' => $request->direct_post,
+            'website_name' => $request->website_name,
+            'website_descripe' => $request->website_descripe,
         ]);
-        session()->flash('edit','تم تعديل البوست بنجاج');
-        return redirect('/setting');
+        session()->flash('edit','تم تعديل البيانات بنجاج');
+        return redirect('admin/setting');
     }
 
     /**
@@ -96,14 +101,14 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function destroy(Request $request)
     {
         //
         $id = $request->id;
         Setting::find($id)->delete();
-        session()->flash('delete','تم حذف البوست بنجاح');
-        return redirect('setting');
+        session()->flash('delete','تم حذف البيانات بنجاح');
+        return redirect('admin/setting');
         // back()
         // redirect('/home/dashboard');
     }
