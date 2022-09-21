@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('css')
 <!-- Internal Data table css -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
-
-<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+{{-- <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet"> --}}
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
  <!---Internal Owl Carousel css-->
 <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
@@ -224,7 +224,9 @@
 
 			</div>
   <!-- edit -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  {{-- id="exampleModal2" --}}
+
+  <div class="modal fade" id="kt_datatable_example_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
  <div class="modal-dialog" role="document">
      <div class="modal-content">
@@ -291,18 +293,30 @@
 
 		<!-- main-content closed -->
 @endsection
-@section('js')
+    @section('js')
+    {{-- @push('scripts') --}}
+    <!--JSGrid css-->
+    <script>
+            window.datatable_url = "{{ route('customers.datatable') }}";
+        // {{--        window.create = "{{ route('page.create') }}";--}}
+    </script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="{{ asset('assets/custom/js/jquery.dataTables.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/customer.js')}}"></script>
+    <script src="{{ asset('assets/js/data-ajax.js')}}"></script>
+
+    {{-- @endpush --}}
 
    <!-- Internal Data tables -->
    {{-- <script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script> --}}
 
-   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
    <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
    <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
    <script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script> --}}
    <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script> --}}
    <script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
    <script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
    <script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
@@ -363,10 +377,10 @@
 
 {{-- <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script> --}}
 {{-- <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script> --}}
-<script>
+{{-- <script>
    $(document).ready(function () {
         $('#datatable').DataTable();
    });
-</script>
+</script> --}}
 @endsection
 

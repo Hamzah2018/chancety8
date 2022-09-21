@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Resources\admin\CustomerResource;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Scope;
 
 class User extends Authenticatable
 {
@@ -17,7 +19,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $resource = CustomerResource::class;
 
+    public function scopeSearch($query,$request)
+        {
+            if(!empty($request->search['value'])){
+                $search = '%' . $request->search['value'] . '%';
+                return $query->whereTranslationLike('name','%' .$search .'%');
+                }
+        return $query;
+        }
+
+    public function scopeCustomer($query){
+        // return $query->where('user_type','customer' )->get();
+        return $query->where('user_type','customer' );
+    }
 
     protected $fillable = [
         'fname',
@@ -25,7 +41,7 @@ class User extends Authenticatable
         'user_type',
         'email',
         'second_email',
-        // 'password',
+        'password',
     ];
 
     /**
@@ -37,15 +53,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function scopeSearch($query , $request)
-    {
-        if(!empty($request->search['value'])) {
-            $search = '%'.$request->search['value'].'%';
-            return $query->where('full_name', 'like' , '%'.$search.'%');
-        }else {
-            return $query;
-        }
-    }
+
     public function setPasswordAttribute($password)
     {
         if ( !empty($password) ) {

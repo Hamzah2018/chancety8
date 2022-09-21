@@ -20,15 +20,24 @@ class CustomerController extends Controller
     {
         //           ::select('name','surname')->where('id', 1)->get();
         $customers = User::where('user_type','customer' )->get();
+        // $customers = User::customer();
+        // $customers = User::customer()->get();
         return view('admin.customer',compact( 'customers'));
         // return view('welcome',compact( 'customers'));
     }
+    // public function datatable3(Request $request)
+    // {
+    //     $customers = User::where('user_type','customer' )->get();
+    //     return view('customers.datatable', compact('customers'));
+    // }
     public function datatable(Request $request)
     {
-        $customers = User::where('user_type','customer' )->get();
-        return view('customers.datatable', compact('customers'));
-
+        $items = User::where('user_type','customer' )->query()->search($request)->orderBy('id', 'desc');
+        dd($items);
+        return $this->filterDataTable($items, $request);
     }
+
+
     public function ajax()
      {
       return view('customers.ajax');
