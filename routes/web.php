@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\CustomerController;
+use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\CustomerLoginController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +33,6 @@ Route::prefix('admin')->group(function () {
 
     });
 
-
-
 // Route::resource('/', CustomerController::class);
 // admin setting , custumor route
 // Route::prefix('admin')->group(function () {
@@ -43,3 +44,26 @@ Route::post('Upload_attachment', [CustomerController::class,'Upload_attachment']
 // Route::get('Download_attachment/{fname}/{filename}', [CustomerController::class,'Download_attachment'])->name('Download_attachment');
 Route::post('Delete_attachment', [CustomerController::class, 'Delete_attachment'])->name('Delete_attachment');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
+Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
+
+Route::get('customer/login', [CustomerLoginController::class, 'showLoginForm']);
+Route::post('customer/login', [CustomerLoginController::class, 'login'])->name('customer.login');
+
+Route::group(["prefix" => "admin", "middleware" => "assign.guard:admin,
+admin/login"],function(){
+   Route::get("dashboard" , function() {
+      return view("admin.home");
+     });
+});
+Route::group(["prefix" => "customer", "middleware" => "assign.guard:customer,
+customer/login"],function(){
+   Route::get("dashboard" , function() {
+      return view("customer.home");
+     });
+});

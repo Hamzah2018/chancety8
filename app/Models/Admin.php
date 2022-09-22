@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Scope;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,28 +19,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public $resource = CustomerResource::class;
-
-    public function scopeSearch($query,$request)
-        {
-            if(!empty($request->search['value'])){
-                $search = '%' . $request->search['value'] . '%';
-                return $query->whereTranslationLike('name','%' .$search .'%');
-                }
-        return $query;
-        }
-
-    public function scopeCustomer($query){
-        // return $query->where('user_type','customer' )->get();
-        return $query->where('user_type','customer' );
-    }
-
     protected $fillable = [
-        'fname',
-        'lname',
-        'user_type',
+        'name',
         'email',
-        'second_email',
         'password',
     ];
 
