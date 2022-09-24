@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\Auth\AdminLoginController;
@@ -18,9 +20,22 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('selection');
+
+// Route::group(['namespace' => 'Auth'],function (){ });
+
+Route::group(['namespace' => 'Auth'],function (){
+    Route::get('/login/{type}' ,[loginController::class,'loginform'])->middleware('guest')->name('login.show');
+    Route::post('/login',[LoginController::class,'login'])->name('login');
+    Route::get('/logout/{type}',[loginController::class,'logout'])->name('logout');
+
+    });
+
+    Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('admin')->group(function () {
     Route::resource('customer', CustomerController::class);
@@ -49,21 +64,21 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
-Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
+// Route::get('admin/login', [AdminLoginController::class, 'showLoginForm']);
+// Route::post('admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 
-Route::get('customer/login', [CustomerLoginController::class, 'showLoginForm']);
-Route::post('customer/login', [CustomerLoginController::class, 'login'])->name('customer.login');
+// Route::get('customer/login', [CustomerLoginController::class, 'showLoginForm']);
+// Route::post('customer/login', [CustomerLoginController::class, 'login'])->name('customer.login');
 
-Route::group(["prefix" => "admin", "middleware" => "assign.guard:admin,
-admin/login"],function(){
-   Route::get("dashboard" , function() {
-      return view("admin.home");
-     });
-});
-Route::group(["prefix" => "customer", "middleware" => "assign.guard:customer,
-customer/login"],function(){
-   Route::get("dashboard" , function() {
-      return view("customer.home");
-     });
-});
+// Route::group(["prefix" => "admin", "middleware" => "assign.guard:admin,
+// admin/login"],function(){
+//    Route::get("dashboard" , function() {
+//       return view("admin.home");
+//      });
+// });
+// Route::group(["prefix" => "customer", "middleware" => "assign.guard:customer,
+// customer/login"],function(){
+//    Route::get("dashboard" , function() {
+//       return view("customer.home");
+//      });
+// });

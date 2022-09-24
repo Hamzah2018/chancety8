@@ -5,9 +5,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header text-center">
+
+                            @if($type == 'admin')
+                                <h5 style="font-family: 'Cairo', sans-serif" class="mb-30">
+                                    تسجيل دخول ادمن
+                                 </h5>
+                            @elseif($type == 'customer')
+                                <h5 style="font-family: 'Cairo', sans-serif" class="mb-30">تسجيل دخول عميل</h5>
+                            @else
+                                <h5 style="font-family: 'Cairo', sans-serif" class="mb-30">
+                                    تسجيل دخول مستخدم عادي
+                                </h5>
+                            @endif
+                </div>
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -16,7 +30,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                                <input type="hidden" value="{{$type}}" name="type">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -24,59 +38,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right"> الاسم الاول</label>
-
-                            <div class="col-md-6">
-                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
-
-                                @error('fname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="second_email" class="col-md-4 col-form-label text-md-right">اليمل الثاني</label>
-
-                            <div class="col-md-6">
-                                <input id="second_email" type="email" class="form-control @error('second_email') is-invalid @enderror" name="second_email" value="{{ old('second_email') }}" required autocomplete="second_email" autofocus>
-
-                                @error('second_email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right"> الاسم الثاني  </label>
-
-                            <div class="col-md-6">
-                                <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
-
-                                @error('lname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">نوع المستخدم</label>
-
-                            <div class="col-md-6">
-                                <input id="user_type" type="text" class="form-control @error('user_type') is-invalid @enderror" name="user_type" value="{{ old('user_type') }}" required autocomplete="user_type" autofocus>
-
-                                @error('user_type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
