@@ -5,6 +5,9 @@ use App\Models\Setting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Traits\AttachFilesTrait;
+use function PHPSTORM_META\type;
+
 // use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
@@ -14,13 +17,18 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    use AttachFilesTrait;
     public function index()
     {
-        //
-        $settings = Setting::all();
-        return view('admin.setting',compact( 'settings'));
-    }
+        $collection = Setting::all();
+        $setting['setting'] = $collection->flatMap(function($collection){
+            return [$collection->key => $collection->value];
+        });
+            return view('admin.setting',$setting);
 
+        // $settings = Setting::all();
+        // return view('admin.setting',compact( 'settings'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -83,6 +91,19 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $info = $request->except('_token','_method','login');
+        $info = $request->except('_token','_method','logo');
+              foreach($info as $key =>$value){
+        Setting::where('type',$key)->update(['value' => $value]);
+              }
+              if($request -> hasFile('logo')){
+                $logo_name = $request->file('logo')->getClientOriginalName();
+                Setting::where('key','logo')->update(['value' => $logo_name]);
+                $this->uploadFile($request,'logo','logo');
+            }
+        session()->flash('edit','تم تعديل البيانات بنجاج');
+        return redirect('admin/setting');
+        // return $info;
         //
         // $id = $request->id;
         // $setting = Setting::find($id);

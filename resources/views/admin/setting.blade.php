@@ -1,301 +1,130 @@
 @extends('layouts.master')
 @section('css')
-<!-- Internal Data table css -->
-<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
-<link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
-<link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-<link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css'" rel="stylesheet">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">بوست</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ المتاحه</span>
+							<h4 class="content-title mb-0 my-auto">الاعدادت</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الاعدات</span>
 						</div>
 					</div>
-
+					<div class="d-flex my-xl-auto right-content">
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+						</div>
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+						</div>
+						<div class="pr-1 mb-3 mb-xl-0">
+							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+						</div>
+						<div class="mb-3 mb-xl-0">
+							<div class="btn-group dropdown">
+								<button type="button" class="btn btn-primary">14 Aug 2019</button>
+								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
+									<a class="dropdown-item" href="#">2015</a>
+									<a class="dropdown-item" href="#">2016</a>
+									<a class="dropdown-item" href="#">2017</a>
+									<a class="dropdown-item" href="#">2018</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-@if(session()->has('Add'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('Add') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-
-@if(session()->has('delete'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('delete') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-
-@if(session()->has('edit'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('edit') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
 				<!-- row -->
 				<div class="row">
-	<!--div-->
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
+                    <div class="col-md-12 mb-30">
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <form enctype="multipart/form-data" method="post" action="{{route('setting.update','test')}}">
+                                    @csrf @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6 border-right-2 border-right-blue-400">
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">اسم المدرسة<span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input name="website_name" value="{{ $setting['website_name'] }}" required type="text" class="form-control" placeholder="Name of Website">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="current_session" class="col-lg-2 col-form-label font-weight-semibold">العام الحالي<span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <select data-placeholder="Choose..." required name="current_session" id="current_session" class="select-search form-control">
+                                                        <option value=""></option>
+                                                        @for($y=date('Y', strtotime('- 3 years')); $y<=date('Y', strtotime('+ 1 years')); $y++)
+                                                            <option {{ ($setting['current_session'] == (($y-=1).'-'.($y+=1))) ? 'selected' : '' }}>{{ ($y-=1).'-'.($y+=1) }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">اسم الموقع المختصر</label>
+                                                <div class="col-lg-9">
+                                                    <input name=" website_title" value="{{ $setting['website_title'] }}" type="text" class="form-control" placeholder="Website Acronym">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">الهاتف</label>
+                                                <div class="col-lg-9">
+                                                    <input name="phone" value="{{ $setting['phone'] }}" type="text" class="form-control" placeholder="Phone">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">البريد الالكتروني</label>
+                                                <div class="col-lg-9">
+                                                    <input name="business_email " value="{{ $setting['business_email'] }}" type="email" class="form-control" placeholder="Business Email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">عنوان المدرسة<span class="text-danger">*</span></label>
+                                                <div class="col-lg-9">
+                                                    <input required name="address" value="{{ $setting['address'] }}" type="text" class="form-control" placeholder="Business Address">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">نهاية الترم الاول </label>
+                                                <div class="col-lg-9">
+                                                    <input name="Banner" value="{{ $setting['Banner'] }}" type="text" class="form-control date-pick" placeholder="Date Term Ends">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">نهاية الترم الثاني</label>
+                                                <div class="col-lg-9">
+                                                    <input name="Slogan" value="{{ $setting['Slogan'] }}" type="text" class="form-control date-pick" placeholder="Date Term Ends">
+                                                </div>
+                                            </div>
 
-                    <div class="col-sm-6 col-md-4 col-xl-3">
-                        <a class="modal-effect btn btn-outline-primary rounded-pill" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">إضافة بوست</a>
-                    </div>
-                    <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
-                {{-- <p class="tx-12 tx-gray-500 mb-2">Example of Valex Striped Rows.. <a href="">Learn more</a></p> --}}
-            </div>
-            <div class="card-body">
-                <div class="table-responsive-lg"  style="overflow-x:auto;">
-                    <table class="table text-md-nowrap" id="example2">
-                        <thead >
-                            <tr>
-                                <th class="wd-15p border-bottom-0">رقم </th>
-                                <th class="wd-15p border-bottom-0"> رقم الوظيه المباشره</th>
-                                <th class="wd-15p border-bottom-0">اسم الموقع</th>
-                                <th class="wd-15p border-bottom-0">وصف الموقع</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($settings as $setting)
-                            <tr id={{$setting->id}}>
-                                <td>{{ $setting->id }}</td>
-                                <td> {{ $setting->direct_post }}</td>
-                                <td> {{ $setting->website_name }}</td>
-                                <td> {{ $setting->website_descripe }}</td>
-                                    {{-- <a href="{{route('setting.edit', $setting->id )}}" class ="modal-effect btn btn-outline-success rounded-pill">Edit</a> --}}
-                                    {{-- <a href="" class ="modal-effect btn btn-outline-danger rounded-pill">delete</a> --}}
-                                    <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                    data-id="{{$setting->id}}"
-                                    data-direct_post="{{ $setting->direct_post}}"
-                                    data-website_name="{{ $setting->website_name }}" data-toggle="modal"
-                                    data-website_descripe="{{ $setting->website_descripe }}" data-toggle="modal"
-                                    data-toggle="modal" href="#exampleModal2"
-                                    title="تعديل"><i class="las la-pen"></i></a>
-                                     <button class="btn btn-outline-danger btn-sm"
-                                                 data-id="{{$setting->id}}"
-                                                data-direct_post="{{ $setting->direct_post }}" data-toggle="modal"
-                                                data-website_name="{{ $setting->website_name }}" data-toggle="modal"
-                                                data-website_descripe="{{ $setting->website_descripe }}" data-toggle="modal"
-                                                data-target="#modaldemo9">حذف</button>
-                                                {{-- <a href="{{route('setting.show',$setting->id)}}" class="btn-warning btn-sm" role="button" aria-pressed="true"><i class="far fa-eye"></i></a> --}}
-                                            </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div><!-- bd -->
-        </div><!-- bd -->
-    </div>
-    <!--/div-->
-		<!-- Basic modal -->
-		<div class="modal" id="modaldemo8">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content modal-content-demo">
-                    <div class="card  box-shadow-0">
-					<div class="modal-header">
-                        {{-- <div class="card-header"> --}}
-                            {{-- <h4 class="card-title mb-1">Default Form</h4> --}}
-                            {{-- <p class="mb-2">It is Very Easy to Customize and it uses in your website apllication.</p> --}}
-                        {{-- </div> --}}
-						<h6 class="modal-title">إضافة بوست
-                            </h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-							<div class="card-body pt-0">
-
-
-                                <form action="{{route('setting.store')}}" method="post" enctype="multipart/form-data" class="form-horizontal" >
-                                    {{-- {{ csrf_feild()}} --}}
-                                    @csrf
-                                    <div class="form-group">
-                                    {{-- <p class="mg-b-10">نوع الشقه</p> --}}
-                                    <div class="form-group">
-										<input type="number" class="form-control" id="direct_post" name="direct_post" placeholder="رقم البوست">
-										<input type="number" class="form-control" id="website_name" name="website_name" placeholder="اسم الموقع">
-										<input type="number" class="form-control" id="website_descripe" name="website_descripe" placeholder="وصف الموقع">
-									</div>
-                                    {{-- <div class="form-group">
-										<input type="text" class="form-control" id="inputName" name="" placeholder="Name">
-									</div> --}}
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-                        <div class="form-group mb-0 mt-3 justify-content-end">
-                            <div>
-                                <button type="submit" class="btn btn-primary rounded">حفظ</button>
-                                {{-- <button type="submit" class="btn btn-secondary">إلغاء</button> --}}
+                                            <div class="form-group row">
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">شعار المدرسة</label>
+                                                <div class="col-lg-9">
+                                                    <div class="mb-3">
+                                                        <img style="width: 100px" height="100px" src="{{ URL::asset('attachments/logo/'.$setting['logo']) }}" alt="">
+                                                    </div>
+                                                    <input name="logo" accept="image/*" type="file" class="file-input" data-show-caption="false" data-show-upload="false" data-fouc>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button class="btn btn-success btn-sm nextBtn btn-lg pull-right" type="submit">{{trans('Students_trans.submit')}}</button>
+                                </form>
                             </div>
                         </div>
-
-					</div>
-				</div>
-			</div>
-        </form>
-		</div>
-		<!-- End Basic modal -->
+                    </div>
 
 				</div>
 				<!-- row closed -->
-
 			</div>
-  <!-- edit -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
- <div class="modal-dialog" role="document">
-     <div class="modal-content">
-         <div class="modal-header">
-             <h5 class="modal-title" id="exampleModalLabel">تعديل </h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-             </button>
-         </div>
-         <div class="modal-body">
-
-             <form action="setting/update" method="post" autocomplete="off">
-                 {{method_field('patch')}}
-                 {{csrf_field()}}
-                 <div class="form-group">
-                     <input type="hidden" name="id"  id="id">
-                       <input type="number" class="form-control" name="direct_post" id="direct_post">
-                       <input type="text" class="form-control" name="website_name" id="website_name">
-                       <input type="text" class="form-control" name="website_descripe" id="website_descripe">
-                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">تاكيد</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                </div>
-            </form>
-        </div>
-    </div>
- </div>
 			<!-- Container closed -->
-
 		</div>
-          <!-- delete -->
-          <div class="modal" id="modaldemo9">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-header">
-                        <h6 class="modal-title">حذف الحقل</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                                                                       type="button"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form action="setting/destroy" method="post">
-                        {{method_field('delete')}}
-                        {{csrf_field()}}
-                        <div class="modal-body">
-                            <p>هل انت متاكد من عملية الحقل ؟</p><br>
-                            <input type="hidden" name="id" id="id" value="id">
-
-                            <input type="text" class="form-control" name="direct_post" id="direct_post" readonly>
-                            <input type="text" class="form-control" name="website_name" id="website_name" readonly>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" class="btn btn-danger">تاكيد</button>
-                        </div>
-                </div>
-                </form>
-            </div>
-        </div>
-
-
-
 		<!-- main-content closed -->
 @endsection
 @section('js')
-<!-- Internal Data tables -->
-<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
-
-<!--Internal  Datatable js -->
-<script src="{{URL::asset('assets/js/table-data.js')}}"></script>
-<script src="{{URL::asset('assets/js/modal.js')}}"></script>
-<script>
-    $('#exampleModal2').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var direct_post = button.data('direct_post')
-        var website_name = button.data('website_name')
-        var website_descripe = button.data('website_descripe')
-
-        var modal = $(this)
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #direct_post').val(direct_post);
-        modal.find('.modal-body #website_name').val(website_name);
-        modal.find('.modal-body #website_descripe').val(website_descripe);
-    })
-</script>
-
-<script>
-    $('#modaldemo9').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var direct_post = button.data('direct_post')
-        var website_name = button.data('website_name')
-        var website_descripe = button.data('website_descripe')
-
-        var modal = $(this)
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #direct_post').val(direct_post);
-        modal.find('.modal-body #website_name').val(website_name);
-        modal.find('.modal-body #website_descripe').val(website_descripe);
-    })
-</script>
-@push('scripts')
-    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script>
-      $(document).ready( function () {
-          $('#example2').DataTable();
-       } );
-    </script>
-@endpush
-
 @endsection
-
