@@ -48,7 +48,7 @@
                                     <div class="row">
                                         <div class="col-md-6 border-right-2 border-right-blue-400">
                                             <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label font-weight-semibold">اسم المدرسة<span class="text-danger">*</span></label>
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">اسم الموقع<span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
                                                     <input name="website_name" value="{{ $setting['website_name'] }}" required type="text" class="form-control" placeholder="Name of Website">
                                                 </div>
@@ -83,7 +83,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label font-weight-semibold">عنوان المدرسة<span class="text-danger">*</span></label>
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">عنوان الموقع<span class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
                                                     <input required name="address" value="{{ $setting['address'] }}" type="text" class="form-control" placeholder="Business Address">
                                                 </div>
@@ -102,7 +102,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label font-weight-semibold">شعار المدرسة</label>
+                                                <label class="col-lg-2 col-form-label font-weight-semibold">شعار الموقغ</label>
                                                 <div class="col-lg-9">
                                                     <div class="mb-3">
                                                         <img style="width: 100px" height="100px" src="{{ URL::asset('attachments/logo/'.$setting['logo']) }}" alt="">
