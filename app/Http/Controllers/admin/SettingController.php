@@ -40,16 +40,16 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         //
-        DB::beginTransaction();
-        $settings= new  Setting();
-        $settings->direct_post = $request->direct_post;
-        $settings->website_name = $request->website_name;
-        $settings->website_descripe = $request->website_descripe;
+        // DB::beginTransaction();
+        // $settings= new  Setting();
+        // $settings->direct_post = $request->direct_post;
+        // $settings->website_name = $request->website_name;
+        // $settings->website_descripe = $request->website_descripe;
 
-        $settings->save();
-        DB::commit();
-        session()->flash('Add', 'تم اضافة البيانات بنجاح ');
-        return redirect('admin/setting');
+        // $settings->save();
+        // DB::commit();
+        // session()->flash('Add', 'تم اضافة البيانات بنجاح ');
+        // return redirect('admin/setting');
     }
 
     /**
@@ -84,15 +84,15 @@ class SettingController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $id = $request->id;
-        $setting = Setting::find($id);
-        $setting->update([
-            'direct_post' => $request->direct_post,
-            'website_name' => $request->website_name,
-            'website_descripe' => $request->website_descripe,
-        ]);
-        session()->flash('edit','تم تعديل البيانات بنجاج');
-        return redirect('admin/setting');
+        // $id = $request->id;
+        // $setting = Setting::find($id);
+        // $setting->update([
+        //     'direct_post' => $request->direct_post,
+        //     'website_name' => $request->website_name,
+        //     'website_descripe' => $request->website_descripe,
+        // ]);
+        // session()->flash('edit','تم تعديل البيانات بنجاج');
+        // return redirect('admin/setting');
     }
 
     /**
@@ -105,11 +105,11 @@ class SettingController extends Controller
     public function destroy(Request $request)
     {
         //
-        $id = $request->id;
-        Setting::find($id)->delete();
-        session()->flash('delete','تم حذف البيانات بنجاح');
-        return redirect('admin/setting');
-        // back()
+        // $id = $request->id;
+        // Setting::find($id)->delete();
+        // session()->flash('delete','تم حذف البيانات بنجاح');
+        // return redirect('admin/setting');
+        // // back()
         // redirect('/home/dashboard');
     }
 }

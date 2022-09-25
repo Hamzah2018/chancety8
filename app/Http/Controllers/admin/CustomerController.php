@@ -21,7 +21,7 @@ class CustomerController extends Controller
         //           ::select('name','surname')->where('id', 1)->get();
         $customers = User::where('user_type','customer' )->get();
         // $customers = User::customer();
-        // $customers = User::customer()->get();
+        // $customers = User::customer()->get()z;
         return view('admin.customer',compact( 'customers'));
         // return view('welcome',compact( 'customers'));
     }

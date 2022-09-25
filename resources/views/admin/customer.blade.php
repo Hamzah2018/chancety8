@@ -3,11 +3,11 @@
 <!-- Internal Data table css -->
 <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
-{{-- <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet"> --}}
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
  <!---Internal Owl Carousel css-->
 <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
@@ -226,7 +226,7 @@
   <!-- edit -->
   {{-- id="exampleModal2" --}}
 
-  <div class="modal fade" id="kt_datatable_example_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade"  id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
  <div class="modal-dialog" role="document">
      <div class="modal-content">
@@ -236,7 +236,7 @@
                  <span aria-hidden="true">&times;</span>
              </button>
          </div>
-         <div class="modal-body">
+         <div class="modal-body" >
 
              <form action="customer/update" method="post" autocomplete="off">
                  {{method_field('patch')}}
@@ -265,7 +265,7 @@
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
                         <h6 class="modal-title">حذف الحقل</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                                                                       type="button"><span aria-hidden="true">&times;</span></button>
+                                                                    type="button"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <form action="customer/destroy" method="post">
                         {{method_field('delete')}}
@@ -310,22 +310,22 @@
    <!-- Internal Data tables -->
    {{-- <script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script> --}}
 
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
-   <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script> --}}
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script> --}}
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script> --}}
    {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script> --}}
-   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script> --}}
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script> --}}
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script> --}}
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script> --}}
+   <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+   <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+   {{-- <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script> --}}
+   <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
    <!--Internal  Datatable js -->
    <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
    <!-- Internal Prism js-->
