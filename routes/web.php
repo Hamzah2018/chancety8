@@ -29,9 +29,12 @@ Route::get('/', [HomeController::class, 'index'])->name('selection');
 // Route::group(['namespace' => 'Auth'],function (){ });
 
 Route::group(['namespace' => 'Auth'],function (){
-    Route::get('/login/{type}' ,[loginController::class,'loginform'])->middleware('guest')->name('login.show');
+
+    Route::get('/login/{type}' ,[loginController::class,'loginForm'])->middleware('guest')->name('login.show');
+
     Route::post('/login',[LoginController::class,'login'])->name('login');
-    Route::get('/logout/{type}',[loginController::class,'logout'])->name('logout');
+
+     Route::get('/logout/{type}',[loginController::class,'logout'])->name('logout');
 
     });
 

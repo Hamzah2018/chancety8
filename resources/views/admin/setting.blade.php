@@ -89,15 +89,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label font-weight-semibold">نهاية الترم الاول </label>
+                                                <label class="col-lg-2 col-form-label font-weight-semibold"> الشعار  </label>
                                                 <div class="col-lg-9">
-                                                    <input name="Banner" value="{{ $setting['Banner'] }}" type="text" class="form-control date-pick" placeholder="Date Term Ends">
+                                                    <input name="Banner" value="{{ $setting['Banner'] }}" type="text" class="form-control date-pick" placeholder="Banner">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label font-weight-semibold">نهاية الترم الثاني</label>
+                                                <label class="col-lg-2 col-form-label font-weight-semibold"> الهدف</label>
                                                 <div class="col-lg-9">
-                                                    <input name="Slogan" value="{{ $setting['Slogan'] }}" type="text" class="form-control date-pick" placeholder="Date Term Ends">
+                                                    <input name="Slogan" value="{{ $setting['Slogan'] }}" type="text" class="form-control date-pick" placeholder="Slogan">
                                                 </div>
                                             </div>
 

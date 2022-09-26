@@ -12,10 +12,6 @@ use App\Traits\AuthTrait;
 class LoginController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
     // use AuthenticatesUsers;
        use AuthTrait;
@@ -37,5 +33,10 @@ class LoginController extends Controller
                $request->session()->regenerateToken();
                return redirect('/');
             }
+            public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
 
 }
