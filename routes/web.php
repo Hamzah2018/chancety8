@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('home');
 // });
-
+Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('selection');
 
 // Route::group(['namespace' => 'Auth'],function (){ });
@@ -37,10 +37,9 @@ Route::group(['namespace' => 'Auth'],function (){
      Route::get('/logout/{type}',[loginController::class,'logout'])->name('logout');
 
     });
-
     Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('dashboard');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('customer', CustomerController::class);
     Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
         Route::get('data/datatables', [CustomerController::class, 'datatable'])->name('datatable');
@@ -63,7 +62,7 @@ Route::post('Upload_attachment', [CustomerController::class,'Upload_attachment']
 Route::post('Delete_attachment', [CustomerController::class, 'Delete_attachment'])->name('Delete_attachment');
 
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
