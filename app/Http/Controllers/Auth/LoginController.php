@@ -15,6 +15,10 @@ class LoginController extends Controller
 
     // use AuthenticatesUsers;
        use AuthTrait;
+       public function __construct()
+       {
+           $this->middleware('guest')->except('logout');
+       }
 
     public function loginForm($type){
         return view('auth.login',compact('type'));
@@ -33,10 +37,6 @@ class LoginController extends Controller
                $request->session()->regenerateToken();
                return redirect('/');
             }
-            public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
 
 
 }

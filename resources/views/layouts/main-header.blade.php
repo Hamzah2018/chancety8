@@ -271,6 +271,16 @@
                         {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> --}}
                         {{-- @csrf --}}
                         {{-- </form> --}}
+                        @if(auth('admin')->check())
+                        <form method="GET" action="{{ route('logout','admin') }}">
+                            @elseif(auth('customer')->check())
+                                <form method="GET" action="{{ route('logout','customer') }}">
+                                @else
+                                <form method="GET" action="{{ route('logout','web') }}">
+                                @endif
+                                @csrf
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault();this.closest('form').submit();"><i class="bx bx-log-out"></i>تسجيل الخروج</a>
+                        </form>
                     </div>
                 </div>
                 <div class="dropdown main-header-message right-toggle">

@@ -29,7 +29,67 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg sticky-top ">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="{{URL::asset('assets/mydesign/imgs/logo.png')}}"  width="100px;" height="60px" alt="" />
+          </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#main"
+            aria-controls="main"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="main">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link p-2 p-lg-3 active" aria-current="page" href="#">الرئيسية</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2 p-lg-3" href="#broker" >الاصناف</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2 p-lg-3" href="#apartment">المنتجات</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2 p-lg-3" href="#about">عناء</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-2 p-lg-3" href="#conect">تواصل</a>
+            </li>
+                <li class="nav-item">
+                    <a class="nav-link p-2 p-lg-3" href="{{ url('/dashboard') }}">لوحة التحكم</a>
+                </li>
 
+                <li class="nav-item">
+                    @if(auth('admin')->check())
+                    <form method="GET" action="{{ route('logout','admin') }}">
+                        @elseif(auth('customer')->check())
+                            <form method="GET" action="{{ route('logout','customer') }}">
+                            @else
+                            <form method="GET" action="{{ route('logout','web') }}">
+                            @endif
+                            @csrf
+                        <a class="dropdown-item" href="#" onclick="event.preventDefault();this.closest('form').submit();"><i class="bx bx-log-out"></i>تسجيل الخروج</a>
+                    </form>
+                </li>
+            </ul>
+            <div></div>
+            <div class=" ps-3 pe-3 d-none d-lg-block">
+              <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </nav>
     <div class="wrapper">
 
         <section class="height-100vh d-flex align-items-center page-section-ptb login"

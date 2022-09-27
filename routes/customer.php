@@ -22,6 +22,7 @@ Route::group(
     //==============================dashboard============================
     Route::get('/customer/dashboard', function () {
         return view('customer.dashboard');
+        // return view('customer.dashboard')->middleware(['auth:customer']);
     });
 
 });
