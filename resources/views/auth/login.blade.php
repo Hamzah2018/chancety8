@@ -6,11 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-
                             @if($type == 'admin')
                                 <h5 style="font-family: 'Cairo', sans-serif" class="mb-30">
                                     تسجيل دخول ادمن
-                                 </h5>
+                                </h5>
                             @elseif($type == 'customer')
                                 <h5 style="font-family: 'Cairo', sans-serif" class="mb-30">تسجيل دخول عميل</h5>
                             @else

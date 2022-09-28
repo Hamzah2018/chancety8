@@ -5,7 +5,7 @@ use App\Models\Setting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Traits\AttachFilesTrait;
+use App\Http\Traits\AttachFilesTrait;
 use function PHPSTORM_META\type;
 
 // use Illuminate\Support\Facades\Storage;

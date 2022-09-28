@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('home');
 // });
-// Auth::routes();
+Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('selection');
 
 // Route::group(['namespace' => 'Auth'],function (){ });
@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Auth'],function (){
     });
 
 
-Route::prefix('admin')->middleware('guest:admin')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::resource('customer', CustomerController::class);
     Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
         Route::get('data/datatables', [CustomerController::class, 'datatable'])->name('datatable');
@@ -49,7 +49,7 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
     Route::get('/dashboard',[DashboardController::class,'index']);
     Route::resource('setting', SettingController::class);
     });
-    Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('dashboard')->middleware(['auth:admin']);
+    Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('admin.dashboard');
 // Route::resource('/', CustomerController::class);
 // admin setting , custumor route
 // Route::prefix('admin')->group(function () {

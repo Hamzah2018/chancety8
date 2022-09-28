@@ -1,18 +1,19 @@
 <?php
-namespace App\Traits;
+namespace App\Http\Traits;
 use App\Providers\RouteServiceProvider;
 
 trait AuthTrait
 {
     public function checkGuard($request){
+
         if($request->type == 'admin'){
-             $guardName = 'admin';
+                $guardName = 'admin';
            }
          elseif ($request->type == 'customer'){
-              $guardName = 'customer';
+                $guardName = 'customer';
            }
           else{
-               $guardName = 'web';
+                $guardName = 'web';
              }
           return $guardName;
     }
