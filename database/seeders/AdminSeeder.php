@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 
+
 class AdminSeeder extends Seeder
 {
     /**
@@ -26,6 +27,13 @@ class AdminSeeder extends Seeder
             'email' => 'admin2@gmail.com',
             'password' => Hash::make('123456789'),
             ]);
+            Admin::create([
+            'name' =>'Ad',
+            'email' => 'ad@gmail.com',
+            'password' => Hash::make('123456789'),
+            ]);
 
     }
+
+//php artisan db:seed --class=AdminSeeder
 }

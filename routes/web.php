@@ -24,12 +24,13 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('home');
 // });
-Auth::routes();
+// Auth::routes();
+// 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:teacher']
 Route::get('/', [HomeController::class, 'index'])->name('selection');
 
 // Route::group(['namespace' => 'Auth'],function (){ });
 
-Route::group(['namespace' => 'Auth'],function (){
+Route::group(['namespace' => 'Auth','localeSessionRedirect','localizationRedirect','Auth:admin'],function (){
 
     Route::get('/login/{type}' ,[loginController::class,'loginForm'])->middleware('guest')->name('login.show');
 
@@ -39,7 +40,11 @@ Route::group(['namespace' => 'Auth'],function (){
 
     });
 
+    Route::group(
+        [
 
+            'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+        ], function () {
 Route::prefix('admin')->group(function () {
     Route::resource('customer', CustomerController::class);
     Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
@@ -49,7 +54,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard',[DashboardController::class,'index']);
     Route::resource('setting', SettingController::class);
     });
-    Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard',[HomeController::class, 'dashboard'])->name('dashboard'); });
 // Route::resource('/', CustomerController::class);
 // admin setting , custumor route
 // Route::prefix('admin')->group(function () {
